@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NetworkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Community">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="country" Type="int" Nullable="false" />
+          <Property Name="state" Type="int" Nullable="false" />
+          <Property Name="town" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countrys">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Errors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="message" Type="text" Nullable="false" />
+          <Property Name="da" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Expansion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="expansion" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bit" Nullable="false" />
+          <Property Name="gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_owner" Type="int" Nullable="false" />
+          <Property Name="start_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="start_expan" Type="int" />
+          <Property Name="current_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="current_expan" Type="int" />
+          <Property Name="url" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_upload" Type="datetime" Nullable="false" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="date_delete" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Peoples">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urlid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_registration" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="community" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="gender" Type="bit" />
+          <Property Name="date_birth" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="confirm_email" Type="bit" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mobile_phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="date_delete" Type="datetime" />
+          <Property Name="town" Type="int" />
+          <Property Name="skype" Type="nvarchar" MaxLength="15" />
+          <Property Name="instagram" Type="nvarchar" MaxLength="15" />
+          <Property Name="twitter" Type="nvarchar" MaxLength="15" />
+          <Property Name="vkontakte" Type="nvarchar" MaxLength="15" />
+          <Property Name="status" Type="nvarchar" MaxLength="120" />
+          <Property Name="avatars" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="state" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Towns">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="town" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Community_Countrys">
+          <End Role="Countrys" Type="Self.Countrys" Multiplicity="1" />
+          <End Role="Community" Type="Self.Community" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countrys">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Community">
+              <PropertyRef Name="country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Community_States">
+          <End Role="States" Type="Self.States" Multiplicity="1" />
+          <End Role="Community" Type="Self.Community" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Community">
+              <PropertyRef Name="state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Community_Towns">
+          <End Role="Towns" Type="Self.Towns" Multiplicity="1" />
+          <End Role="Community" Type="Self.Community" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towns">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Community">
+              <PropertyRef Name="town" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peoples_Community">
+          <End Role="Community" Type="Self.Community" Multiplicity="1" />
+          <End Role="Peoples" Type="Self.Peoples" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Community">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Peoples">
+              <PropertyRef Name="community" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peoples_Genders">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="0..1" />
+          <End Role="Peoples" Type="Self.Peoples" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Peoples">
+              <PropertyRef Name="gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="NetworkModelStoreContainer">
+          <EntitySet Name="Community" EntityType="Self.Community" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countrys" EntityType="Self.Countrys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Errors" EntityType="Self.Errors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Expansion" EntityType="Self.Expansion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Peoples" EntityType="Self.Peoples" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Towns" EntityType="Self.Towns" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Community_Countrys" Association="Self.FK_Community_Countrys">
+            <End Role="Countrys" EntitySet="Countrys" />
+            <End Role="Community" EntitySet="Community" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Community_States" Association="Self.FK_Community_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="Community" EntitySet="Community" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Community_Towns" Association="Self.FK_Community_Towns">
+            <End Role="Towns" EntitySet="Towns" />
+            <End Role="Community" EntitySet="Community" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peoples_Community" Association="Self.FK_Peoples_Community">
+            <End Role="Community" EntitySet="Community" />
+            <End Role="Peoples" EntitySet="Peoples" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peoples_Genders" Association="Self.FK_Peoples_Genders">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Peoples" EntitySet="Peoples" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NetworkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NetworkEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(NetworkModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(NetworkModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Communities" EntityType="NetworkModel.Community" />
+          <EntitySet Name="Countrys" EntityType="NetworkModel.Country" />
+          <EntitySet Name="Errors" EntityType="NetworkModel.Error" />
+          <EntitySet Name="Expansions" EntityType="NetworkModel.Expansion" />
+          <EntitySet Name="Genders" EntityType="NetworkModel.Gender" />
+          <EntitySet Name="Images" EntityType="NetworkModel.Image" />
+          <EntitySet Name="Peoples" EntityType="NetworkModel.People" />
+          <EntitySet Name="States" EntityType="NetworkModel.State" />
+          <EntitySet Name="sysdiagrams" EntityType="NetworkModel.sysdiagram" />
+          <EntitySet Name="Towns" EntityType="NetworkModel.Town" />
+          <AssociationSet Name="FK_Community_Countrys" Association="NetworkModel.FK_Community_Countrys">
+            <End Role="Country" EntitySet="Countrys" />
+            <End Role="Community" EntitySet="Communities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Community_States" Association="NetworkModel.FK_Community_States">
+            <End Role="State" EntitySet="States" />
+            <End Role="Community" EntitySet="Communities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Community_Towns" Association="NetworkModel.FK_Community_Towns">
+            <End Role="Town" EntitySet="Towns" />
+            <End Role="Community" EntitySet="Communities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peoples_Community" Association="NetworkModel.FK_Peoples_Community">
+            <End Role="Community" EntitySet="Communities" />
+            <End Role="People" EntitySet="Peoples" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Peoples_Genders" Association="NetworkModel.FK_Peoples_Genders">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="People" EntitySet="Peoples" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Community">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="Int32" Nullable="false" />
+          <Property Name="state" Type="Int32" Nullable="false" />
+          <Property Name="town" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Country1" Relationship="NetworkModel.FK_Community_Countrys" FromRole="Community" ToRole="Country" />
+          <NavigationProperty Name="State1" Relationship="NetworkModel.FK_Community_States" FromRole="Community" ToRole="State" />
+          <NavigationProperty Name="Town1" Relationship="NetworkModel.FK_Community_Towns" FromRole="Community" ToRole="Town" />
+          <NavigationProperty Name="Peoples" Relationship="NetworkModel.FK_Peoples_Community" FromRole="Community" ToRole="People" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Communities" Relationship="NetworkModel.FK_Community_Countrys" FromRole="Country" ToRole="Community" />
+        </EntityType>
+        <EntityType Name="Error">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="da" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Expansion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="expansion1" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Boolean" Nullable="false" />
+          <Property Name="gender1" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Peoples" Relationship="NetworkModel.FK_Peoples_Genders" FromRole="Gender" ToRole="People" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_owner" Type="Int32" Nullable="false" />
+          <Property Name="start_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="start_expan" Type="Int32" />
+          <Property Name="current_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="current_expan" Type="Int32" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_upload" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="date_delete" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urlid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_registration" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="community" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="Boolean" />
+          <Property Name="date_birth" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="confirm_email" Type="Boolean" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mobile_phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="date_delete" Type="DateTime" Precision="3" />
+          <Property Name="town" Type="Int32" />
+          <Property Name="skype" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="instagram" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="twitter" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="vkontakte" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="avatars" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Community1" Relationship="NetworkModel.FK_Peoples_Community" FromRole="People" ToRole="Community" />
+          <NavigationProperty Name="Gender1" Relationship="NetworkModel.FK_Peoples_Genders" FromRole="People" ToRole="Gender" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="state1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Communities" Relationship="NetworkModel.FK_Community_States" FromRole="State" ToRole="Community" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Town">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="town1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Communities" Relationship="NetworkModel.FK_Community_Towns" FromRole="Town" ToRole="Community" />
+        </EntityType>
+        <Association Name="FK_Community_Countrys">
+          <End Type="NetworkModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="NetworkModel.Community" Role="Community" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Community">
+              <PropertyRef Name="country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Community_States">
+          <End Type="NetworkModel.State" Role="State" Multiplicity="1" />
+          <End Type="NetworkModel.Community" Role="Community" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Community">
+              <PropertyRef Name="state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Community_Towns">
+          <End Type="NetworkModel.Town" Role="Town" Multiplicity="1" />
+          <End Type="NetworkModel.Community" Role="Community" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Town">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Community">
+              <PropertyRef Name="town" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peoples_Community">
+          <End Type="NetworkModel.Community" Role="Community" Multiplicity="1" />
+          <End Type="NetworkModel.People" Role="People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Community">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="community" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Peoples_Genders">
+          <End Type="NetworkModel.Gender" Role="Gender" Multiplicity="0..1" />
+          <End Type="NetworkModel.People" Role="People" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="People">
+              <PropertyRef Name="gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NetworkModelStoreContainer" CdmEntityContainer="NetworkEntities">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="NetworkModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="NetworkModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="NetworkModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="NetworkModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NetworkModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="NetworkModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NetworkModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="NetworkModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="NetworkModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Communities">
+            <EntityTypeMapping TypeName="NetworkModel.Community">
+              <MappingFragment StoreEntitySet="Community">
+                <ScalarProperty Name="town" ColumnName="town" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countrys">
+            <EntityTypeMapping TypeName="NetworkModel.Country">
+              <MappingFragment StoreEntitySet="Countrys">
+                <ScalarProperty Name="country1" ColumnName="country" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Errors">
+            <EntityTypeMapping TypeName="NetworkModel.Error">
+              <MappingFragment StoreEntitySet="Errors">
+                <ScalarProperty Name="da" ColumnName="da" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expansions">
+            <EntityTypeMapping TypeName="NetworkModel.Expansion">
+              <MappingFragment StoreEntitySet="Expansion">
+                <ScalarProperty Name="expansion1" ColumnName="expansion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="NetworkModel.Gender">
+              <MappingFragment StoreEntitySet="Genders">
+                <ScalarProperty Name="gender1" ColumnName="gender" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="NetworkModel.Image">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="date_delete" ColumnName="date_delete" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="date_upload" ColumnName="date_upload" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="current_expan" ColumnName="current_expan" />
+                <ScalarProperty Name="current_name" ColumnName="current_name" />
+                <ScalarProperty Name="start_expan" ColumnName="start_expan" />
+                <ScalarProperty Name="start_name" ColumnName="start_name" />
+                <ScalarProperty Name="id_owner" ColumnName="id_owner" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Peoples">
+            <EntityTypeMapping TypeName="NetworkModel.People">
+              <MappingFragment StoreEntitySet="Peoples">
+                <ScalarProperty Name="avatars" ColumnName="avatars" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="vkontakte" ColumnName="vkontakte" />
+                <ScalarProperty Name="twitter" ColumnName="twitter" />
+                <ScalarProperty Name="instagram" ColumnName="instagram" />
+                <ScalarProperty Name="skype" ColumnName="skype" />
+                <ScalarProperty Name="town" ColumnName="town" />
+                <ScalarProperty Name="date_delete" ColumnName="date_delete" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="mobile_phone" ColumnName="mobile_phone" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="confirm_email" ColumnName="confirm_email" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="date_birth" ColumnName="date_birth" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="community" ColumnName="community" />
+                <ScalarProperty Name="date_registration" ColumnName="date_registration" />
+                <ScalarProperty Name="urlid" ColumnName="urlid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="NetworkModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="state1" ColumnName="state" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="NetworkModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Towns">
+            <EntityTypeMapping TypeName="NetworkModel.Town">
+              <MappingFragment StoreEntitySet="Towns">
+                <ScalarProperty Name="town1" ColumnName="town" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
