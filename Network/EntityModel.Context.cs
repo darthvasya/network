@@ -27,6 +27,7 @@ namespace Network
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AccessToken> AccessTokens { get; set; }
         public virtual DbSet<Community> Communities { get; set; }
         public virtual DbSet<Country> Countrys { get; set; }
         public virtual DbSet<Error> Errors { get; set; }
@@ -37,6 +38,8 @@ namespace Network
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Town> Towns { get; set; }
+        public virtual DbSet<Community_info> Community_info { get; set; }
+        public virtual DbSet<Person> People { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
