@@ -111,8 +111,6 @@
       <LastGenOutput>EntityModel.cs</LastGenOutput>
     </Content>
     <Content Include="Peoples\Registration\RegistrationService.svc" />
-    <Content Include="scripts\ai.0.15.0-build58334.js" />
-    <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Shedule.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
