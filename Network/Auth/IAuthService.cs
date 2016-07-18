@@ -19,5 +19,8 @@ namespace Network.Auth
 
         [OperationContract]
         Auth UpdateToken(Auth auth_inf);
+
+        [OperationContract]
+        Auth Authentication(string access_token, int id);
     }
 }

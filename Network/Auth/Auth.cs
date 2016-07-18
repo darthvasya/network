@@ -18,5 +18,8 @@ namespace Network.Auth
 
         [DataMember]
         public string exception { get; set; }
+
+        [DataMember]
+        public bool access { get; set; }
     }
 }

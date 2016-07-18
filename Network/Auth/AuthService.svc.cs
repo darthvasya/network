@@ -10,7 +10,13 @@ namespace Network.Auth
     public class AuthService : IAuthService
     {
         NetworkEntities context = new NetworkEntities();
-        public DateTime refresh_time = new DateTime();
+
+        // Errors codes
+        /*
+         *  100 - Login error 
+         *  101 - Error with tokens in updating
+         *  102 - Authentication error. Incorrect access_token
+         */
 
         public Auth Authorization(string email, string password, DateTime time)
         {
@@ -22,7 +28,7 @@ namespace Network.Auth
                 {
                     auth.access_token = null;
                     auth.refresh_token = null;
-                    auth.exception = "Login error";
+                    auth.exception = "100";
                     return auth;
                 }
                 else
@@ -78,7 +84,7 @@ namespace Network.Auth
                 {
                     auth.access_token = null;
                     auth.refresh_token = null;
-                    auth.exception = "Error with tokens";
+                    auth.exception = "101";
                 }
                 else
                 {
@@ -100,6 +106,29 @@ namespace Network.Auth
                 return auth;
             }
             
+        }
+
+
+        public Auth Authentication(string access_token, int id)
+        {
+            Auth auth = new Auth();
+            try
+            {
+                AccessToken token = context.AccessTokens.Where(p => p.access_token == access_token).Where(p => p.id == id).FirstOrDefault();
+                if (token == null)
+                {
+                    auth.exception = "102";
+                }
+                else
+                {
+                    auth.access = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                auth.exception = ex.Message;
+            }
+            return auth;  
         }
 
         public string Test(string email, string password, DateTime time)
