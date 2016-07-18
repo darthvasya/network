@@ -18,6 +18,5 @@ namespace Network
         public string access_token { get; set; }
         public string refresh_token { get; set; }
         public System.DateTime last_refresh { get; set; }
-        public System.DateTime last_login { get; set; }
     }
 }

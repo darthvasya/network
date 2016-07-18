@@ -13,7 +13,6 @@
           <Property Name="access_token" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="refresh_token" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="last_refresh" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="last_login" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Community">
           <Key>
@@ -405,7 +404,6 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
           <Property Name="access_token" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="refresh_token" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="last_refresh" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="last_login" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         <EntityType Name="Community">
           <Key>
@@ -658,7 +656,6 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
           <EntitySetMapping Name="AccessTokens">
             <EntityTypeMapping TypeName="NetworkModel.AccessToken">
               <MappingFragment StoreEntitySet="AccessToken">
-                <ScalarProperty Name="last_login" ColumnName="last_login" />
                 <ScalarProperty Name="last_refresh" ColumnName="last_refresh" />
                 <ScalarProperty Name="refresh_token" ColumnName="refresh_token" />
                 <ScalarProperty Name="access_token" ColumnName="access_token" />

@@ -7,15 +7,15 @@
       <Diagram DiagramId="b9e71d602cc4439887236d4adfe123d3" Name="Diagram1" ZoomLevel="92">
         <EntityTypeShape EntityType="NetworkModel.AccessToken" Width="1.5" PointX="7.75" PointY="1.625" />
         <EntityTypeShape EntityType="NetworkModel.Community" Width="1.5" PointX="3" PointY="3.375" />
-        <EntityTypeShape EntityType="NetworkModel.Country" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NetworkModel.Country" Width="1.5" PointX="0.75" PointY="7.125" />
         <EntityTypeShape EntityType="NetworkModel.Error" Width="1.5" PointX="2.75" PointY="8.625" />
         <EntityTypeShape EntityType="NetworkModel.Expansion" Width="1.5" PointX="7.75" PointY="4.625" />
         <EntityTypeShape EntityType="NetworkModel.Gender" Width="1.5" PointX="3" PointY="0.875" />
         <EntityTypeShape EntityType="NetworkModel.Image" Width="1.5" PointX="4.75" PointY="8.625" />
         <EntityTypeShape EntityType="NetworkModel.People" Width="1.5" PointX="5.25" PointY="2" />
-        <EntityTypeShape EntityType="NetworkModel.State" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="NetworkModel.State" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="NetworkModel.sysdiagram" Width="1.5" PointX="7.75" PointY="7.625" />
-        <EntityTypeShape EntityType="NetworkModel.Town" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="NetworkModel.Town" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="NetworkModel.Community_info" Width="1.5" PointX="9.75" PointY="1.625" />
         <EntityTypeShape EntityType="NetworkModel.Person" Width="1.5" PointX="9.75" PointY="4.625" />
         <AssociationConnector Association="NetworkModel.FK_Community_Countrys" />

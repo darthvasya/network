@@ -15,49 +15,91 @@ namespace Network.Auth
         public Auth Authorization(string email, string password, DateTime time)
         {
             Auth auth = new Auth();
-            People that = context.Peoples.Where(p => p.email == email).Where(p => p.password == password).FirstOrDefault();
-            if (that == null)
+            try
             {
-                auth.access_token = null;
-                auth.refresh_token = null;
-                auth.exception = "Login error";
-                return auth;
-            }
-            else
-            {
-                try
+                People that = context.Peoples.Where(p => p.email == email).Where(p => p.password == password).FirstOrDefault();
+                if (that == null)
                 {
-                    AccessToken token = context.AccessTokens.Where(p => p.id == that.id).FirstOrDefault();
+                    auth.access_token = null;
+                    auth.refresh_token = null;
+                    auth.exception = "Login error";
+                    return auth;
+                }
+                else
+                {
                     int id_user = that.id;
+                    AccessToken token = context.AccessTokens.Where(p => p.id == id_user).FirstOrDefault();
 
                     if (token == null)
                     {
+                        token = new AccessToken();
                         token.id = id_user;
                         token.access_token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
                         token.refresh_token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
-                        token.last_login = DateTime.Now;
                         token.last_refresh = DateTime.Now;
 
                         context.AccessTokens.Add(token);
                         context.SaveChanges();
-
-                        auth.access_token = token.access_token;
-                        auth.refresh_token = token.refresh_token;
-                        return auth;
                     }
                     else
                     {
-                        //update token body
-                        return auth;
+                        token.access_token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                        token.refresh_token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                        token.last_refresh = DateTime.Now;
+
+                        context.SaveChanges();
                     }
 
-                }
-                catch (Exception ex)
-                {
-                    auth.exception = ex.Message;
+                    auth.access_token = token.access_token;
+                    auth.refresh_token = token.refresh_token;
+                    auth.exception = null;
+
                     return auth;
                 }
             }
+            catch (Exception ex)
+            {
+                auth.access_token = null;
+                auth.refresh_token = null;
+                auth.exception = ex.Message;
+
+                return auth;
+            }
+        }
+
+        public Auth UpdateToken(Auth auth_inf)
+        {
+            Auth auth = new Auth();
+
+            try
+            {
+                AccessToken token = context.AccessTokens.Where(p => p.refresh_token ==  auth_inf.refresh_token).Where(p => p.access_token == auth_inf.access_token).FirstOrDefault();
+                if (token == null)
+                {
+                    auth.access_token = null;
+                    auth.refresh_token = null;
+                    auth.exception = "Error with tokens";
+                }
+                else
+                {
+                    auth.access_token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                    auth.refresh_token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                    auth.exception = null;
+
+                    token.access_token = auth.access_token;
+                    token.refresh_token = auth.refresh_token;
+                    token.last_refresh = DateTime.Now;
+                    
+                    context.SaveChanges();
+                }
+                return auth;
+            }
+            catch (Exception ex)
+            {
+                auth.exception = ex.Message;
+                return auth;
+            }
+            
         }
 
         public string Test(string email, string password, DateTime time)

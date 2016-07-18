@@ -16,5 +16,8 @@ namespace Network.Auth
 
         [OperationContract]
         string Test(string email, string password, DateTime time);
+
+        [OperationContract]
+        Auth UpdateToken(Auth auth_inf);
     }
 }
