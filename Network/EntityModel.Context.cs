@@ -28,6 +28,7 @@ namespace Network
         }
     
         public virtual DbSet<AccessToken> AccessTokens { get; set; }
+        public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<Community> Communities { get; set; }
         public virtual DbSet<Country> Countrys { get; set; }
         public virtual DbSet<Error> Errors { get; set; }
@@ -35,6 +36,8 @@ namespace Network
         public virtual DbSet<Gender> Genders { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<People> Peoples { get; set; }
+        public virtual DbSet<PhotoComment> PhotoComments { get; set; }
+        public virtual DbSet<PhotoPost> PhotoPosts { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Town> Towns { get; set; }

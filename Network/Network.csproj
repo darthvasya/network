@@ -120,6 +120,9 @@
     <Compile Include="AccessToken.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Album.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Auth\Auth.cs" />
     <Compile Include="Auth\AuthService.svc.cs">
       <DependentUpon>AuthService.svc</DependentUpon>
@@ -170,6 +173,12 @@
       <DependentUpon>RegistrationService.svc</DependentUpon>
     </Compile>
     <Compile Include="Person.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoComment.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PhotoPost.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
