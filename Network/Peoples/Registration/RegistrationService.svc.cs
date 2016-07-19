@@ -30,25 +30,40 @@ namespace Network.Peoples.Registration
             try
             {
                 People registerObject = new People();
-                registerObject.urlid = urlid;
-                registerObject.date_registration = DateTime.Now;
-                registerObject.community = community_id;
-                registerObject.name = name;
-                registerObject.surname = surname;
-                registerObject.gender = gender;
-                registerObject.date_birth = date_birth;
-                registerObject.email = email;
-                registerObject.password = password;
-                
-                //default parametrs
-                registerObject.confirm_email = false;
-                registerObject.deleted = false;
-                registerObject.avatars = "0";
+                People buf = context.Peoples.Where(p => p.urlid == urlid).FirstOrDefault();
+                if (buf == null)
+                {
+                    registerObject.urlid = urlid;
+                    registerObject.date_registration = DateTime.Now;
+                    registerObject.community = community_id;
+                    registerObject.name = name;
+                    registerObject.surname = surname;
+                    registerObject.gender = gender;
+                    registerObject.date_birth = date_birth;
+                    registerObject.email = email;
+                    registerObject.password = password;
 
-                context.Peoples.Add(registerObject);
-                context.SaveChanges();
+                    //default parametrs
+                    registerObject.confirm_email = false;
+                    registerObject.deleted = false;
+                    registerObject.avatars = "0";
 
-                return "OK";
+                    context.Peoples.Add(registerObject);
+                    context.SaveChanges();
+
+                    Album album = new Album();
+                    album.name = "Avatars";
+                    album.date_creation = DateTime.Now;
+                    album.id_owner = context.Peoples.Where(p => p.urlid == urlid).FirstOrDefault().id;
+                    context.Albums.Add(album);
+                    context.SaveChanges();
+                    return "OK";
+                }
+                else
+                {
+                    return "URLID error";
+                }
+
             }
             catch (Exception ex)
             {
