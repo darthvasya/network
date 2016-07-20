@@ -7,11 +7,13 @@ using System.Text;
 
 namespace Network.Images
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IImageService" in both code and config file together.
     [ServiceContract]
     public interface IImageService
     {
         [OperationContract]
-        bool UploadImage(byte[] buffer, string name, int id_user, string access_token);
+        ImageClass UploadImage(byte[] buffer, string name, int id_user, string access_token);
+
+        [OperationContract]
+        ImageClass UploadMiniature(byte[] buffer, int id_image, string urlid, int id_user, string access_token);
     }
 }

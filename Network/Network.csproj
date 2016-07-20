@@ -132,6 +132,9 @@
     <Compile Include="Community.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Community_info.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Country.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -160,6 +163,7 @@
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Images\IImageService.cs" />
+    <Compile Include="Images\ImageClass.cs" />
     <Compile Include="Images\ImageService.svc.cs">
       <DependentUpon>ImageService.svc</DependentUpon>
     </Compile>
@@ -170,6 +174,9 @@
     <Compile Include="Peoples\Registration\IRegistrationService.cs" />
     <Compile Include="Peoples\Registration\RegistrationService.svc.cs">
       <DependentUpon>RegistrationService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Person.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PhotoComment.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
