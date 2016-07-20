@@ -20,15 +20,25 @@ namespace Network.Images
         }
 
         private string ServerDirectory = "h:/root/home/vasya18-001/www/site1";
+       
+        //private string ServerDirectory = "D:/live";
 
-        public bool UploadImage(byte[] buffer)
+        public bool UploadImage(byte[] buffer, string name, int ext)
         {
             try
             {
+                Image image = new Image();
+                //image.id_owner = 
+                image.start_name = name;
+                image.start_expan = ext;
+                //image.current_name
                 if (Directory.Exists(ServerDirectory + "\\ImageStorage") == false)
-                { Directory.CreateDirectory(ServerDirectory + "\\ImageStorage"); }
+                {
+                    Directory.CreateDirectory(ServerDirectory + "\\ImageStorage");
+                }
                 // создаём файл
-                File.WriteAllBytes(ServerDirectory + "\\" + "name", buffer);
+                File.WriteAllBytes(ServerDirectory + "\\ImageStorage\\" + "name.jpg", buffer);
+
                 return true;
             }
             catch (Exception ex)

@@ -13,5 +13,8 @@ namespace Network.Images
     {
         [OperationContract]
         void DoWork();
+
+        [OperationContract]
+        bool UploadImage(byte[] buffer, string name, int ext);
     }
 }

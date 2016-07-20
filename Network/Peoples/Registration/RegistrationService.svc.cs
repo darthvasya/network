@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -13,18 +14,10 @@ namespace Network.Peoples.Registration
     {
         NetworkEntities context = new NetworkEntities();
 
-        public string DoWork(string test)
-        {
-            Error er = new Error();
-            er.message = "sa";
-            er.time = DateTime.Now;
-            er.da = false;
-            context.Errors.Add(er);
-            context.SaveChanges();
-            return test;
-        }
  
 
+        //private string ServerDirectory = "h:/root/home/vasya18-001/www/site1";
+        private string ServerDirectory = "D:/Network";
         public string Registration(string urlid, int community_id, string name, string surname, bool gender, DateTime date_birth, string email, string password)
         {
             try
@@ -57,6 +50,12 @@ namespace Network.Peoples.Registration
                     album.id_owner = context.Peoples.Where(p => p.urlid == urlid).FirstOrDefault().id;
                     context.Albums.Add(album);
                     context.SaveChanges();
+
+                    Directory.CreateDirectory(ServerDirectory + "\\" + urlid);
+                    Directory.CreateDirectory(ServerDirectory + "\\" + urlid + "\\" + "images");
+                    Directory.CreateDirectory(ServerDirectory + "\\" + urlid + "\\" + "documents");
+                    Directory.CreateDirectory(ServerDirectory + "\\" + urlid + "\\" + "videos");
+
                     return "OK";
                 }
                 else

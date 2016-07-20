@@ -12,9 +12,6 @@ namespace Network.Peoples.Registration
     public interface IRegistrationService
     {
         [OperationContract]
-        string DoWork(string test);
- 
-        [OperationContract]
         string Registration(string urlid, int community_id, string name, string surname, bool gender, DateTime date_birth, string email, string password);
 
     }
