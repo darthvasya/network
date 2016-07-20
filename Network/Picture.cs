@@ -12,12 +12,16 @@ namespace Network
     using System;
     using System.Collections.Generic;
     
-    public partial class Community_info
+    public partial class Picture
     {
         public int id { get; set; }
-        public string name { get; set; }
-        public string country { get; set; }
-        public string state { get; set; }
-        public string town { get; set; }
+        public int id_owner { get; set; }
+        public string start_name { get; set; }
+        public string current_name { get; set; }
+        public string url { get; set; }
+        public Nullable<bool> have_miniature { get; set; }
+        public System.DateTime date_upload { get; set; }
+        public bool deleted { get; set; }
+        public Nullable<System.DateTime> date_delete { get; set; }
     }
 }

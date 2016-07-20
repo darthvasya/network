@@ -66,21 +66,6 @@
           <Property Name="id" Type="bit" Nullable="false" />
           <Property Name="gender" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <EntityType Name="Images">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_owner" Type="int" Nullable="false" />
-          <Property Name="start_name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="start_expan" Type="int" />
-          <Property Name="current_name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="current_expan" Type="int" />
-          <Property Name="url" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="date_upload" Type="datetime" Nullable="false" />
-          <Property Name="deleted" Type="bit" Nullable="false" />
-          <Property Name="date_delete" Type="datetime" />
-        </EntityType>
         <EntityType Name="Peoples">
           <Key>
             <PropertyRef Name="id" />
@@ -131,6 +116,20 @@
           <Property Name="deleted" Type="bit" Nullable="false" />
           <Property Name="date_delete" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_owner" Type="int" Nullable="false" />
+          <Property Name="start_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="current_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="url" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="have_miniature" Type="bit" />
+          <Property Name="date_upload" Type="datetime" Nullable="false" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="date_delete" Type="datetime" />
+        </EntityType>
         <EntityType Name="States">
           <Key>
             <PropertyRef Name="id" />
@@ -154,53 +153,6 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="town" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Network.dbo.Community_info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Community_info">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="country" />
-            <PropertyRef Name="state" />
-            <PropertyRef Name="town" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="state" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="town" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Network.dbo.People' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="People">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="urlid" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="surname" />
-            <PropertyRef Name="dateOfBirth" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="password" />
-            <PropertyRef Name="gender" />
-            <PropertyRef Name="country" />
-            <PropertyRef Name="town" />
-            <PropertyRef Name="state" />
-            <PropertyRef Name="Expr1" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="urlid" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="surname" Type="nvarchar" MaxLength="25" Nullable="false" />
-          <Property Name="dateOfBirth" Type="date" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="mobilePhone" Type="nvarchar" MaxLength="20" />
-          <Property Name="gender" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="country" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="town" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="state" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Expr1" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Community_Countrys">
           <End Role="Countrys" Type="Self.Countrys" Multiplicity="1" />
@@ -301,39 +253,13 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
           <EntitySet Name="Errors" EntityType="Self.Errors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Expansion" EntityType="Self.Expansion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Peoples" EntityType="Self.Peoples" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhotoComments" EntityType="Self.PhotoComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhotoPosts" EntityType="Self.PhotoPosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pictures" EntityType="Self.Pictures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Towns" EntityType="Self.Towns" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Community_info" EntityType="Self.Community_info" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Community_info].[id] AS [id], 
-    [Community_info].[name] AS [name], 
-    [Community_info].[country] AS [country], 
-    [Community_info].[state] AS [state], 
-    [Community_info].[town] AS [town]
-    FROM [dbo].[Community_info] AS [Community_info]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="People" EntityType="Self.People" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [People].[id] AS [id], 
-    [People].[urlid] AS [urlid], 
-    [People].[name] AS [name], 
-    [People].[surname] AS [surname], 
-    [People].[dateOfBirth] AS [dateOfBirth], 
-    [People].[email] AS [email], 
-    [People].[password] AS [password], 
-    [People].[mobilePhone] AS [mobilePhone], 
-    [People].[gender] AS [gender], 
-    [People].[country] AS [country], 
-    [People].[town] AS [town], 
-    [People].[state] AS [state], 
-    [People].[Expr1] AS [Expr1]
-    FROM [dbo].[People] AS [People]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Community_Countrys" Association="Self.FK_Community_Countrys">
             <End Role="Countrys" EntitySet="Countrys" />
             <End Role="Community" EntitySet="Community" />
@@ -397,15 +323,13 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
           <EntitySet Name="Errors" EntityType="NetworkModel.Error" />
           <EntitySet Name="Expansions" EntityType="NetworkModel.Expansion" />
           <EntitySet Name="Genders" EntityType="NetworkModel.Gender" />
-          <EntitySet Name="Images" EntityType="NetworkModel.Image" />
           <EntitySet Name="Peoples" EntityType="NetworkModel.People" />
           <EntitySet Name="PhotoComments" EntityType="NetworkModel.PhotoComment" />
           <EntitySet Name="PhotoPosts" EntityType="NetworkModel.PhotoPost" />
+          <EntitySet Name="Pictures" EntityType="NetworkModel.Picture" />
           <EntitySet Name="States" EntityType="NetworkModel.State" />
           <EntitySet Name="sysdiagrams" EntityType="NetworkModel.sysdiagram" />
           <EntitySet Name="Towns" EntityType="NetworkModel.Town" />
-          <EntitySet Name="Community_info" EntityType="NetworkModel.Community_info" />
-          <EntitySet Name="People" EntityType="NetworkModel.Person" />
           <AssociationSet Name="FK_Community_Countrys" Association="NetworkModel.FK_Community_Countrys">
             <End Role="Country" EntitySet="Countrys" />
             <End Role="Community" EntitySet="Communities" />
@@ -505,21 +429,6 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
           <Property Name="gender1" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Peoples" Relationship="NetworkModel.FK_Peoples_Genders" FromRole="Gender" ToRole="People" />
         </EntityType>
-        <EntityType Name="Image">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_owner" Type="Int32" Nullable="false" />
-          <Property Name="start_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="start_expan" Type="Int32" />
-          <Property Name="current_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="current_expan" Type="Int32" />
-          <Property Name="url" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="date_upload" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <Property Name="date_delete" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="People">
           <Key>
             <PropertyRef Name="id" />
@@ -572,6 +481,20 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
           <Property Name="deleted" Type="Boolean" Nullable="false" />
           <Property Name="date_delete" Type="DateTime" Precision="7" />
         </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_owner" Type="Int32" Nullable="false" />
+          <Property Name="start_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="current_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="have_miniature" Type="Boolean" />
+          <Property Name="date_upload" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="date_delete" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="State">
           <Key>
             <PropertyRef Name="id" />
@@ -597,49 +520,6 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="town1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Communities" Relationship="NetworkModel.FK_Community_Towns" FromRole="Town" ToRole="Community" />
-        </EntityType>
-        <EntityType Name="Community_info">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="country" />
-            <PropertyRef Name="state" />
-            <PropertyRef Name="town" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="state" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="town" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Person">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="urlid" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="surname" />
-            <PropertyRef Name="dateOfBirth" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="password" />
-            <PropertyRef Name="gender" />
-            <PropertyRef Name="country" />
-            <PropertyRef Name="town" />
-            <PropertyRef Name="state" />
-            <PropertyRef Name="Expr1" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="urlid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="surname" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="dateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="mobilePhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="town" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="state" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Expr1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Community_Countrys">
           <End Type="NetworkModel.Country" Role="Country" Multiplicity="1" />
@@ -799,22 +679,6 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="NetworkModel.Image">
-              <MappingFragment StoreEntitySet="Images">
-                <ScalarProperty Name="date_delete" ColumnName="date_delete" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="date_upload" ColumnName="date_upload" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="current_expan" ColumnName="current_expan" />
-                <ScalarProperty Name="current_name" ColumnName="current_name" />
-                <ScalarProperty Name="start_expan" ColumnName="start_expan" />
-                <ScalarProperty Name="start_name" ColumnName="start_name" />
-                <ScalarProperty Name="id_owner" ColumnName="id_owner" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Peoples">
             <EntityTypeMapping TypeName="NetworkModel.People">
               <MappingFragment StoreEntitySet="Peoples">
@@ -868,6 +732,21 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="NetworkModel.Picture">
+              <MappingFragment StoreEntitySet="Pictures">
+                <ScalarProperty Name="date_delete" ColumnName="date_delete" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="date_upload" ColumnName="date_upload" />
+                <ScalarProperty Name="have_miniature" ColumnName="have_miniature" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="current_name" ColumnName="current_name" />
+                <ScalarProperty Name="start_name" ColumnName="start_name" />
+                <ScalarProperty Name="id_owner" ColumnName="id_owner" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="States">
             <EntityTypeMapping TypeName="NetworkModel.State">
               <MappingFragment StoreEntitySet="States">
@@ -891,36 +770,6 @@ warning 6002: The table/view 'Network.dbo.People' does not have a primary key de
             <EntityTypeMapping TypeName="NetworkModel.Town">
               <MappingFragment StoreEntitySet="Towns">
                 <ScalarProperty Name="town1" ColumnName="town" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Community_info">
-            <EntityTypeMapping TypeName="NetworkModel.Community_info">
-              <MappingFragment StoreEntitySet="Community_info">
-                <ScalarProperty Name="town" ColumnName="town" />
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="NetworkModel.Person">
-              <MappingFragment StoreEntitySet="People">
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="town" ColumnName="town" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="mobilePhone" ColumnName="mobilePhone" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="dateOfBirth" ColumnName="dateOfBirth" />
-                <ScalarProperty Name="surname" ColumnName="surname" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="urlid" ColumnName="urlid" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -56,6 +56,8 @@ namespace Network.Peoples.Registration
                     Directory.CreateDirectory(ServerDirectory + "\\" + urlid + "\\" + "documents");
                     Directory.CreateDirectory(ServerDirectory + "\\" + urlid + "\\" + "videos");
 
+                    Directory.CreateDirectory(ServerDirectory + "\\" + urlid + "\\" + "images" + "\\" + "avatars");
+
                     return "OK";
                 }
                 else

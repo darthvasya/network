@@ -12,9 +12,6 @@ namespace Network.Images
     public interface IImageService
     {
         [OperationContract]
-        void DoWork();
-
-        [OperationContract]
-        bool UploadImage(byte[] buffer, string name, int ext);
+        bool UploadImage(byte[] buffer, string name, int id_user, string access_token);
     }
 }
