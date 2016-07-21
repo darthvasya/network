@@ -18,7 +18,10 @@ namespace Network.Images
         //private string ServerDirectory = "h:/root/home/vasya18-001/www/site1";
         // path
         private string ServerDirectory = "D:/Network/users";
-
+        ////                                                     ///
+        ///////////////////////// UPLOAD METHODS //////////////////////
+        ///                                                      ///
+        ///                                                      
         public ImageClass UploadImage(byte[] buffer, string name, int id_user, string access_token)
         {
             ImageClass response = new ImageClass();
@@ -150,6 +153,80 @@ namespace Network.Images
         }
 
         ////                                                     ///
+        ///////////////////////// CREATE METHODS //////////////////////
+        ///                                                      ///
+        public Album CreateAlbum(string name, int id_user, string access_token)
+        {
+            Album album = new Album();
+            try
+            {
+                
+                bool auth = isAuth(id_user, access_token);
+                if (!auth)
+                    return album;
+                else
+                {
+                    album = context.Albums.Where(p => p.id_owner == id_user).Where(p => p.name == name).FirstOrDefault();
+                    if (album == null)
+                    {
+                        album = new Album();
+                        album.id_owner = id_user;
+                        album.name = name;
+                        album.date_creation = DateTime.Now;
+
+                        context.Albums.Add(album);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        return album;
+                    }
+
+                    return album;
+                }
+            }
+            catch (Exception ex)
+            {
+                return album;
+            }
+            
+            
+        }
+
+        ////                                                     ///
+        ///////////////////////// DELETE METHODS //////////////////////
+        ///                                                      ///
+        ///                                                      
+
+        public bool DeleteImage(int id_image, int id_user, string access_token)
+        {
+            try
+            {
+                if (isAuth(id_user, access_token))
+                {
+                    Picture image = context.Pictures.Where(p => p.id == id_image).Where(p => p.id_owner == id_user).FirstOrDefault();
+                    if (image == null)
+                        return false;
+                    else
+                    {
+                        image.deleted = true;
+                        image.date_delete = DateTime.Now;
+                        context.SaveChanges();
+                        return true;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        ////                                                     ///
         ///////////////////////// GET METHODS //////////////////////
         ///                                                      ///
         ///                                                      
@@ -159,7 +236,7 @@ namespace Network.Images
             try
             {
                 Picture image = context.Pictures.FirstOrDefault(p => p.id == id_image);
-                if (image == null)
+                if (image == null || image.deleted == true)
                 {
                     return "url/image/404jpg";
                 }
@@ -179,7 +256,7 @@ namespace Network.Images
             Picture image = context.Pictures.FirstOrDefault(p => p.id == id_image);
             try
             {
-                if (image == null)
+                if (image == null || image.deleted == true)
                 {
                     return new Picture();
                 }
@@ -191,6 +268,28 @@ namespace Network.Images
             catch (Exception ex)
             {
                 return image;
+            }
+        }
+
+        ////                                                     ///
+        ///////////////////////// AUTH METHOD //////////////////////
+        ///                                                      ///
+        ///                                                      
+
+        private bool isAuth(int id_user, string access_token)
+        {
+            try
+            {
+                Auth.AuthService service = new Auth.AuthService();
+                Auth.Auth authObj = service.Authentication(access_token, id_user);
+                if (authObj.access == true)
+                    return true;
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

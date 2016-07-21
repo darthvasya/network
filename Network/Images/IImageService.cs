@@ -24,5 +24,11 @@ namespace Network.Images
 
         [OperationContract]
         Picture GetImageById(int id_image);
+
+        [OperationContract]
+        bool DeleteImage(int id_image, int id_user, string access_token);
+
+        [OperationContract]
+        Album CreateAlbum(string name, int id_user, string access_token);
     }
 }
