@@ -160,13 +160,13 @@ namespace Network.Images
             Album album = new Album();
             try
             {
-                
                 bool auth = isAuth(id_user, access_token);
                 if (!auth)
                     return album;
                 else
                 {
                     album = context.Albums.Where(p => p.id_owner == id_user).Where(p => p.name == name).FirstOrDefault();
+                    string urlid = context.Peoples.Where(p => p.id == id_user).FirstOrDefault().urlid;
                     if (album == null)
                     {
                         album = new Album();
@@ -176,6 +176,7 @@ namespace Network.Images
 
                         context.Albums.Add(album);
                         context.SaveChanges();
+                        //Directory.CreateDirectory(ServerDirectory + "\\" + urlid + "\\" + "images" + "\\" + album.name);
                     }
                     else
                     {
@@ -193,6 +194,30 @@ namespace Network.Images
             
         }
 
+        public Album AddImageToAlbum(byte[] image, string name, int id_album, int id_user, string access_token)
+        {
+            Album album = null;
+            try
+            {
+                album = context.Albums.Where(p => p.id == id_album).FirstOrDefault();
+                ImageClass response = UploadImage(image, name, id_user, access_token);
+                if (response.image_id != 0 || album != null)
+                {
+                    string photos = album.photos;
+                    photos = response.image_id + "," + photos;
+                    album.photos = photos;
+                    context.SaveChanges();
+                    return album;
+                }
+                else
+                    return album;
+            }
+            catch
+            {
+                return album;
+            }
+            
+        }
         ////                                                     ///
         ///////////////////////// DELETE METHODS //////////////////////
         ///                                                      ///
@@ -224,6 +249,42 @@ namespace Network.Images
             {
                 return false;
             }
+        }
+
+        public bool DeleteImageFromAlbum(int id_image, int id_album, int id_user, string access_token)
+        {
+            try
+            {
+                bool auth = isAuth(id_user, access_token);
+                if (!auth)
+                    return false;
+                else
+                {
+                    Album album = context.Albums.Where(p => p.id == id_album).FirstOrDefault();
+                    if (album == null)
+                        return false;
+                    else
+                    {
+                        string photos = album.photos;
+                        if (photos == "")
+                            return false;
+                        else
+                        {
+                            List<int> photos_list = photos.Split(',').Select(int.Parse).ToList();
+                            photos_list.Remove(id_image);
+                            photos = string.Join(",", photos_list.ToArray()); 
+                            album.photos = photos;
+                            context.SaveChanges();
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+             
         }
 
         ////                                                     ///
