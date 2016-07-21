@@ -21,5 +21,8 @@ namespace Network.Images
 
         [OperationContract]
         string GetImageUrlById(int id_image);
+
+        [OperationContract]
+        Picture GetImageById(int id_image);
     }
 }

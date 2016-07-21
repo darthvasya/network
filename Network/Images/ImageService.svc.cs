@@ -158,8 +158,15 @@ namespace Network.Images
         {
             try
             {
-                Picture image = context.Pictures.Find(id_image);
-                return image.url;
+                Picture image = context.Pictures.FirstOrDefault(p => p.id == id_image);
+                if (image == null)
+                {
+                    return "url/image/404jpg";
+                }
+                else
+                {
+                    return image.url;
+                }
             }
             catch (Exception ex)
             {
@@ -169,11 +176,17 @@ namespace Network.Images
 
         public Picture GetImageById(int id_image)
         {
-            Picture image = new Picture();
+            Picture image = context.Pictures.FirstOrDefault(p => p.id == id_image);
             try
             {
-                
-                return image;
+                if (image == null)
+                {
+                    return new Picture();
+                }
+                else
+                {
+                    return image;
+                }
             }
             catch (Exception ex)
             {
