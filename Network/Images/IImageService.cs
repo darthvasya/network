@@ -15,5 +15,11 @@ namespace Network.Images
 
         [OperationContract]
         ImageClass UploadMiniature(byte[] buffer, int id_image, string urlid, int id_user, string access_token);
+
+        [OperationContract]
+        ImageClass UploadAvatar(byte[] buffer, string name, int id_user, string access_token);
+
+        [OperationContract]
+        string GetImageUrlById(int id_image);
     }
 }

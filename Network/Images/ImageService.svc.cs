@@ -17,7 +17,7 @@ namespace Network.Images
 
         //private string ServerDirectory = "h:/root/home/vasya18-001/www/site1";
         // path
-        private string ServerDirectory = "D:/Network";
+        private string ServerDirectory = "D:/Network/users";
 
         public ImageClass UploadImage(byte[] buffer, string name, int id_user, string access_token)
         {
@@ -31,7 +31,7 @@ namespace Network.Images
                 if (auth_object.access == true)
                 {
                     //generate name
-                    string current_name = DateTime.Now.ToString("yyyy") + Guid.NewGuid() + DateTime.Now.ToString("MMddHHmmssfff");
+                    string current_name = Guid.NewGuid().ToString().Substring(0, 25).Replace("-", "");
                     //urlid
                     string urlid = context.Peoples.Where(p => p.id == id_user).FirstOrDefault().urlid;
 
@@ -44,12 +44,12 @@ namespace Network.Images
                     image.current_name = current_name;
                     image.date_upload = DateTime.Now;
                     image.deleted = false;
-                    string path = ServerDirectory + "\\" + urlid + "\\" + "images" + "\\" + current_name;
-                    File.WriteAllBytes(path + ".jpg", buffer);
+                    string path = "\\" + urlid + "\\" + "images" + "\\" + current_name;
+                    File.WriteAllBytes(ServerDirectory + path + ".jpg", buffer);
                     buffer = null;
-                    file = Image.FromFile(path + ".jpg");
+                    file = Image.FromFile(ServerDirectory + path + ".jpg");
                     bmp = new Bitmap(file, 200, 200);
-                    bmp.Save(path + "_200" + ".jpg", ImageFormat.Jpeg);
+                    bmp.Save(ServerDirectory + path + "_200" + ".jpg", ImageFormat.Jpeg);
                     //other variants 
                     //..
 
@@ -122,5 +122,63 @@ namespace Network.Images
             }
         }
 
+        public ImageClass UploadAvatar(byte[] buffer, string name, int id_user, string access_token)
+        {
+            ImageClass response = new ImageClass();
+            try
+            {
+                response = UploadImage(buffer, name, id_user, access_token);
+                if (response.image_id != 0 && response.image_url != null)
+                {
+                    Album album = context.Albums.Where(p => p.id_owner == id_user).Where(p => p.name == "Avatars").FirstOrDefault();
+                    string photos = album.photos;
+                    photos = response.image_id + ", " + photos;
+                    album.photos = photos;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    response.exception = "Album error";
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.exception = ex.Message;
+                return response;
+            }
+        }
+
+        ////                                                     ///
+        ///////////////////////// GET METHODS //////////////////////
+        ///                                                      ///
+        ///                                                      
+
+        public string GetImageUrlById(int id_image)
+        {
+            try
+            {
+                Picture image = context.Pictures.Find(id_image);
+                return image.url;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public Picture GetImageById(int id_image)
+        {
+            Picture image = new Picture();
+            try
+            {
+                
+                return image;
+            }
+            catch (Exception ex)
+            {
+                return image;
+            }
+        }
     }
 }
