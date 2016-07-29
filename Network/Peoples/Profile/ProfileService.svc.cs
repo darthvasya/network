@@ -115,6 +115,61 @@ namespace Network.Peoples.Profile
                 return false;
             }
         }
+
+        public bool EditSocial(int id_user, string access_token, string skype, string instagram, string twitter, string vkontakte)
+        {
+            try
+            {
+                bool auth = isAuth(id_user, access_token);
+                if (!auth)
+                    return false;
+                else
+                {
+                    People user = context.Peoples.Where(p => p.id == id_user).FirstOrDefault();
+                    if (user == null)
+                        return false;
+                    else
+                    {
+                        user.skype = skype;
+                        user.instagram = instagram;
+                        user.twitter = twitter;
+                        user.vkontakte = vkontakte;
+                        context.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool EditLanguage(int id_user, string access_token, List<int> languages)
+        {
+            try
+            {
+                bool auth = isAuth(id_user, access_token);
+                if (!auth)
+                    return false;
+                else
+                {
+                    People user = context.Peoples.Where(p => p.id == id_user).FirstOrDefault();
+                    if (user == null)
+                        return false;
+                    else
+                    {
+                        //
+                        context.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
         ////                                                     ///
         ///////////////////////// AUTH METHOD //////////////////////
         ///                                                      ///

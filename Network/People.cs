@@ -28,6 +28,7 @@ namespace Network
         public string mobile_phone { get; set; }
         public bool deleted { get; set; }
         public Nullable<System.DateTime> date_delete { get; set; }
+        public Nullable<int> native_town { get; set; }
         public Nullable<int> town { get; set; }
         public string skype { get; set; }
         public string instagram { get; set; }
@@ -35,6 +36,12 @@ namespace Network
         public string vkontakte { get; set; }
         public string status { get; set; }
         public string avatars { get; set; }
+        public string languages { get; set; }
+        public Nullable<int> faculty { get; set; }
+        public Nullable<int> period_study { get; set; }
+        public Nullable<int> chair { get; set; }
+        public Nullable<int> form_study { get; set; }
+        public Nullable<int> student_status { get; set; }
     
         public virtual Community Community1 { get; set; }
         public virtual Gender Gender1 { get; set; }

@@ -131,6 +131,9 @@
       <DependentUpon>AuthService.svc</DependentUpon>
     </Compile>
     <Compile Include="Auth\IAuthService.cs" />
+    <Compile Include="Chair.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Community.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -158,6 +161,9 @@
     <Compile Include="Expansion.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Faculty.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Gender.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -171,6 +177,9 @@
       <DependentUpon>PhotoPostService.svc</DependentUpon>
     </Compile>
     <Compile Include="IShedule.cs" />
+    <Compile Include="Language.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Notification.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -210,10 +219,19 @@
     <Compile Include="State.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="StudentStudyStatu.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StudyForm.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sysdiagram.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Town.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserSettieng.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

@@ -16,5 +16,14 @@ namespace Network.Peoples.Profile
 
         [OperationContract]
         bool EditPhone(int id_user, string access_token, string phone);
+
+        [OperationContract]
+        bool DeletePage(int id_user, string access_token);
+
+        [OperationContract]
+        bool RestorePage(int id_user, string access_token);
+
+        [OperationContract]
+        bool EditSocial(int id_user, string access_token, string skype, string instagram, string twitter, string vkontakte);
     }
 }
