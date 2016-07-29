@@ -15,6 +15,7 @@ namespace Network
     public partial class PhotoPost
     {
         public int id { get; set; }
+        public int id_image { get; set; }
         public int id_owner { get; set; }
         public string likes { get; set; }
         public string comments { get; set; }

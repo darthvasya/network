@@ -111,6 +111,7 @@
       <LastGenOutput>EntityModel.cs</LastGenOutput>
     </Content>
     <Content Include="Images\ImageService.svc" />
+    <Content Include="Images\Posts\PhotoPostService.svc" />
     <Content Include="Peoples\Registration\RegistrationService.svc" />
     <Content Include="Shedule.svc" />
     <Content Include="Web.config">
@@ -130,9 +131,6 @@
     </Compile>
     <Compile Include="Auth\IAuthService.cs" />
     <Compile Include="Community.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Community_info.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Country.cs">
@@ -167,6 +165,10 @@
     <Compile Include="Images\ImageService.svc.cs">
       <DependentUpon>ImageService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Images\Posts\IPhotoPostService.cs" />
+    <Compile Include="Images\Posts\PhotoPostService.svc.cs">
+      <DependentUpon>PhotoPostService.svc</DependentUpon>
+    </Compile>
     <Compile Include="IShedule.cs" />
     <Compile Include="People.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
@@ -174,9 +176,6 @@
     <Compile Include="Peoples\Registration\IRegistrationService.cs" />
     <Compile Include="Peoples\Registration\RegistrationService.svc.cs">
       <DependentUpon>RegistrationService.svc</DependentUpon>
-    </Compile>
-    <Compile Include="Person.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PhotoComment.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
