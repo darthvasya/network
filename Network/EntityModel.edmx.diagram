@@ -8,22 +8,24 @@
         <EntityTypeShape EntityType="NetworkModel.AccessToken" Width="1.5" PointX="7.75" PointY="1.625" />
         <EntityTypeShape EntityType="NetworkModel.Album" Width="1.5" PointX="2.75" PointY="8.625" />
         <EntityTypeShape EntityType="NetworkModel.Community" Width="1.5" PointX="3" PointY="3.375" />
-        <EntityTypeShape EntityType="NetworkModel.Country" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="NetworkModel.Country" Width="1.5" PointX="0.75" PointY="7.125" />
         <EntityTypeShape EntityType="NetworkModel.Error" Width="1.5" PointX="7.75" PointY="4.625" />
         <EntityTypeShape EntityType="NetworkModel.Expansion" Width="1.5" PointX="4.75" PointY="8.625" />
         <EntityTypeShape EntityType="NetworkModel.Gender" Width="1.5" PointX="3" PointY="0.875" />
+        <EntityTypeShape EntityType="NetworkModel.Notification" Width="1.5" PointX="7.75" PointY="7.625" />
+        <EntityTypeShape EntityType="NetworkModel.NotificationType" Width="1.5" PointX="9.75" PointY="1.625" />
         <EntityTypeShape EntityType="NetworkModel.People" Width="1.5" PointX="5.25" PointY="2" />
-        <EntityTypeShape EntityType="NetworkModel.PhotoPost" Width="1.5" PointX="9.75" PointY="1.625" />
-        <EntityTypeShape EntityType="NetworkModel.Picture" Width="1.5" PointX="9.75" PointY="5.625" />
-        <EntityTypeShape EntityType="NetworkModel.State" Width="1.5" PointX="0.75" PointY="7.125" />
-        <EntityTypeShape EntityType="NetworkModel.sysdiagram" Width="1.5" PointX="9.75" PointY="9.625" />
-        <EntityTypeShape EntityType="NetworkModel.Town" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NetworkModel.PhotoComment" Width="1.5" PointX="9.75" PointY="4.625" />
+        <EntityTypeShape EntityType="NetworkModel.PhotoPost" Width="1.5" PointX="6.75" PointY="10.625" />
+        <EntityTypeShape EntityType="NetworkModel.Picture" Width="1.5" PointX="9.75" PointY="8.625" />
+        <EntityTypeShape EntityType="NetworkModel.State" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NetworkModel.sysdiagram" Width="1.5" PointX="11.75" PointY="1.625" />
+        <EntityTypeShape EntityType="NetworkModel.Town" Width="1.5" PointX="0.75" PointY="3.875" />
         <AssociationConnector Association="NetworkModel.FK_Community_Countrys" />
         <AssociationConnector Association="NetworkModel.FK_Community_States" />
         <AssociationConnector Association="NetworkModel.FK_Community_Towns" />
         <AssociationConnector Association="NetworkModel.FK_Peoples_Community" />
         <AssociationConnector Association="NetworkModel.FK_Peoples_Genders" />
-        <EntityTypeShape EntityType="NetworkModel.PhotoComment" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

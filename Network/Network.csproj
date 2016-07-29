@@ -112,6 +112,7 @@
     </Content>
     <Content Include="Images\ImageService.svc" />
     <Content Include="Images\Posts\PhotoPostService.svc" />
+    <Content Include="Peoples\Profile\ProfileService.svc" />
     <Content Include="Peoples\Registration\RegistrationService.svc" />
     <Content Include="Shedule.svc" />
     <Content Include="Web.config">
@@ -170,8 +171,18 @@
       <DependentUpon>PhotoPostService.svc</DependentUpon>
     </Compile>
     <Compile Include="IShedule.cs" />
+    <Compile Include="Notification.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationType.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="People.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Peoples\Profile\IProfileService.cs" />
+    <Compile Include="Peoples\Profile\ProfileService.svc.cs">
+      <DependentUpon>ProfileService.svc</DependentUpon>
     </Compile>
     <Compile Include="Peoples\Registration\IRegistrationService.cs" />
     <Compile Include="Peoples\Registration\RegistrationService.svc.cs">

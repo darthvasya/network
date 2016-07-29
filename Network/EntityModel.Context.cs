@@ -34,13 +34,15 @@ namespace Network
         public virtual DbSet<Error> Errors { get; set; }
         public virtual DbSet<Expansion> Expansions { get; set; }
         public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<NotificationType> NotificationTypes { get; set; }
         public virtual DbSet<People> Peoples { get; set; }
+        public virtual DbSet<PhotoComment> PhotoComments { get; set; }
         public virtual DbSet<PhotoPost> PhotoPosts { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Town> Towns { get; set; }
-        public virtual DbSet<PhotoComment> PhotoComments { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

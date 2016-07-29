@@ -12,7 +12,10 @@ namespace Network.Images.Posts
     public interface IPhotoPostService
     {
         [OperationContract]
-        PhotoPost CreatePhotoPost(int id_user, string access_token, int id_image);
+        PhotoPost CreatePhotoPost(int id_user, string access_token, int id_image, string description);
+
+        [OperationContract]
+        PhotoPost EditPhotoDescription(int id_user, string access_token, string description);
 
         [OperationContract]
         bool DeletePhotoPost(int id_user, string access_token, int id_post);
@@ -25,5 +28,8 @@ namespace Network.Images.Posts
 
         [OperationContract]
         bool AddCommentLike(int id_user, string access_token, int id_comment);
+
+        [OperationContract]
+        bool DeleteComment(int id_user, string access_token, int id_comment);
     }
 }

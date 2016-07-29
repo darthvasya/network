@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Network.Peoples.Profile.ProfileService" CodeBehind="ProfileService.svc.cs" %>

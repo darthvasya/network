@@ -66,6 +66,25 @@
           <Property Name="id" Type="bit" Nullable="false" />
           <Property Name="gender" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="watched" Type="bit" Nullable="false" />
+          <Property Name="watch_time" Type="datetime2" Precision="7" />
+          <Property Name="type_notification" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="body" Type="text" />
+        </EntityType>
         <EntityType Name="Peoples">
           <Key>
             <PropertyRef Name="id" />
@@ -111,6 +130,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_image" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
           <Property Name="id_owner" Type="int" Nullable="false" />
           <Property Name="likes" Type="nvarchar(max)" />
           <Property Name="comments" Type="nvarchar(max)" />
@@ -255,6 +275,8 @@
           <EntitySet Name="Errors" EntityType="Self.Errors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Expansion" EntityType="Self.Expansion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotificationTypes" EntityType="Self.NotificationTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Peoples" EntityType="Self.Peoples" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhotoComments" EntityType="Self.PhotoComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhotoPosts" EntityType="Self.PhotoPosts" Schema="dbo" store:Type="Tables" />
@@ -325,7 +347,10 @@
           <EntitySet Name="Errors" EntityType="NetworkModel.Error" />
           <EntitySet Name="Expansions" EntityType="NetworkModel.Expansion" />
           <EntitySet Name="Genders" EntityType="NetworkModel.Gender" />
+          <EntitySet Name="Notifications" EntityType="NetworkModel.Notification" />
+          <EntitySet Name="NotificationTypes" EntityType="NetworkModel.NotificationType" />
           <EntitySet Name="Peoples" EntityType="NetworkModel.People" />
+          <EntitySet Name="PhotoComments" EntityType="NetworkModel.PhotoComment" />
           <EntitySet Name="PhotoPosts" EntityType="NetworkModel.PhotoPost" />
           <EntitySet Name="Pictures" EntityType="NetworkModel.Picture" />
           <EntitySet Name="States" EntityType="NetworkModel.State" />
@@ -351,7 +376,6 @@
             <End Role="Gender" EntitySet="Genders" />
             <End Role="People" EntitySet="Peoples" />
           </AssociationSet>
-          <EntitySet Name="PhotoComments" EntityType="NetworkModel.PhotoComment" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -431,6 +455,25 @@
           <Property Name="gender1" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Peoples" Relationship="NetworkModel.FK_Peoples_Genders" FromRole="Gender" ToRole="People" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="watched" Type="Boolean" Nullable="false" />
+          <Property Name="watch_time" Type="DateTime" Precision="7" />
+          <Property Name="type_notification" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NotificationType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="People">
           <Key>
             <PropertyRef Name="id" />
@@ -459,12 +502,26 @@
           <NavigationProperty Name="Community1" Relationship="NetworkModel.FK_Peoples_Community" FromRole="People" ToRole="Community" />
           <NavigationProperty Name="Gender1" Relationship="NetworkModel.FK_Peoples_Genders" FromRole="People" ToRole="Gender" />
         </EntityType>
+        <EntityType Name="PhotoComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_owner" Type="Int32" Nullable="false" />
+          <Property Name="body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="photos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="date_creation" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="date_delete" Type="DateTime" Precision="7" />
+          <Property Name="likes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="PhotoPost">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_image" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id_owner" Type="Int32" Nullable="false" />
           <Property Name="likes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -572,19 +629,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="PhotoComment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_owner" Type="Int32" Nullable="false" />
-          <Property Name="body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="photos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="date_creation" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <Property Name="date_delete" Type="DateTime" Precision="7" />
-          <Property Name="likes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -683,6 +727,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="NetworkModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="type_notification" ColumnName="type_notification" />
+                <ScalarProperty Name="watch_time" ColumnName="watch_time" />
+                <ScalarProperty Name="watched" ColumnName="watched" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationTypes">
+            <EntityTypeMapping TypeName="NetworkModel.NotificationType">
+              <MappingFragment StoreEntitySet="NotificationTypes">
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Peoples">
             <EntityTypeMapping TypeName="NetworkModel.People">
               <MappingFragment StoreEntitySet="Peoples">
@@ -710,6 +775,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PhotoComments">
+            <EntityTypeMapping TypeName="NetworkModel.PhotoComment">
+              <MappingFragment StoreEntitySet="PhotoComments">
+                <ScalarProperty Name="likes" ColumnName="likes" />
+                <ScalarProperty Name="date_delete" ColumnName="date_delete" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="date_creation" ColumnName="date_creation" />
+                <ScalarProperty Name="photos" ColumnName="photos" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="id_owner" ColumnName="id_owner" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PhotoPosts">
             <EntityTypeMapping TypeName="NetworkModel.PhotoPost">
               <MappingFragment StoreEntitySet="PhotoPosts">
@@ -719,6 +798,7 @@
                 <ScalarProperty Name="comments" ColumnName="comments" />
                 <ScalarProperty Name="likes" ColumnName="likes" />
                 <ScalarProperty Name="id_owner" ColumnName="id_owner" />
+                <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="id_image" ColumnName="id_image" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -762,20 +842,6 @@
             <EntityTypeMapping TypeName="NetworkModel.Town">
               <MappingFragment StoreEntitySet="Towns">
                 <ScalarProperty Name="town1" ColumnName="town" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PhotoComments">
-            <EntityTypeMapping TypeName="NetworkModel.PhotoComment">
-              <MappingFragment StoreEntitySet="PhotoComments">
-                <ScalarProperty Name="likes" ColumnName="likes" />
-                <ScalarProperty Name="date_delete" ColumnName="date_delete" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="date_creation" ColumnName="date_creation" />
-                <ScalarProperty Name="photos" ColumnName="photos" />
-                <ScalarProperty Name="body" ColumnName="body" />
-                <ScalarProperty Name="id_owner" ColumnName="id_owner" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

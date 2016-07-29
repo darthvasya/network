@@ -12,16 +12,10 @@ namespace Network
     using System;
     using System.Collections.Generic;
     
-    public partial class PhotoPost
+    public partial class NotificationType
     {
         public int id { get; set; }
-        public int id_image { get; set; }
-        public string description { get; set; }
-        public int id_owner { get; set; }
-        public string likes { get; set; }
-        public string comments { get; set; }
-        public System.DateTime date_creation { get; set; }
-        public bool deleted { get; set; }
-        public Nullable<System.DateTime> date_delete { get; set; }
+        public string name { get; set; }
+        public string body { get; set; }
     }
 }

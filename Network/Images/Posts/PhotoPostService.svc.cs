@@ -14,7 +14,7 @@ namespace Network.Images.Posts
     {
         NetworkEntities context = new NetworkEntities();
 
-        public PhotoPost CreatePhotoPost(int id_user, string access_token, int id_image)
+        public PhotoPost CreatePhotoPost(int id_user, string access_token, int id_image, string description)
         {
             PhotoPost post = new PhotoPost();
             try
@@ -28,9 +28,31 @@ namespace Network.Images.Posts
                     post.id_image = id_image;
                     post.date_creation = DateTime.Now;
                     post.deleted = false;
+                    post.description = description;
                     context.PhotoPosts.Add(post);
                     context.SaveChanges();
 
+                    return post;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public PhotoPost EditPhotoDescription(int id_user, string access_token, string description)
+        {
+            PhotoPost post = new PhotoPost();
+            try
+            {
+                bool auth = isAuth(id_user, access_token);
+                if (!auth)
+                    return null;
+                else
+                {
+                    post.description = description;
+                    context.SaveChanges();
                     return post;
                 }
             }
@@ -50,10 +72,16 @@ namespace Network.Images.Posts
                 else
                 {
                     PhotoPost post = context.PhotoPosts.Where(p => p.id == id_post).FirstOrDefault();
-                    post.deleted = true;
-                    post.date_delete = DateTime.Now;
-                    context.SaveChanges();
-                    return true;
+                    if (post != null && post.id_owner == id_user)
+                    {
+                        post.deleted = true;
+                        post.date_delete = DateTime.Now;
+                        context.SaveChanges();
+                        return true;
+                    }
+                    else
+                        return false;
+
                 }
             }
             catch
@@ -186,6 +214,33 @@ namespace Network.Images.Posts
                         context.SaveChanges();
                         return true;
                     }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteComment(int id_user, string access_token, int id_comment)
+        {
+            try
+            {
+                bool auth = isAuth(id_user, access_token);
+                if (!auth)
+                    return false;
+                else
+                {
+                    PhotoComment ph_com = context.PhotoComments.Where(p => p.id == id_comment).FirstOrDefault();
+                    if (ph_com != null && ph_com.id_owner == id_user)
+                    {
+                        ph_com.deleted = true;
+                        ph_com.date_delete = DateTime.Now;
+                        context.SaveChanges();
+                        return true;
+                    }
+                    else
+                        return false;
                 }
             }
             catch
