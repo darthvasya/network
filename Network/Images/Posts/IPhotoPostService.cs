@@ -16,5 +16,8 @@ namespace Network.Images.Posts
 
         [OperationContract]
         bool DeletePhotoPost(int id_user, string access_token, int id_post);
+
+        [OperationContract]
+        bool AddLike(int id_user, string access_token, int id_post);
     }
 }

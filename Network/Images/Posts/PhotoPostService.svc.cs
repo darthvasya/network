@@ -62,7 +62,49 @@ namespace Network.Images.Posts
             }
         }
 
-        
+        public bool AddLike(int id_user, string access_token, int id_post)
+        {
+            try
+            {
+                bool auth = isAuth(id_user, access_token);
+                if (!auth)
+                    return false;
+                else
+                {
+                    PhotoPost post = context.PhotoPosts.Where(p => p.id == id_post).FirstOrDefault();
+                    if (post.deleted == true)
+                        return false;
+                    string likes = post.likes;
+                    if (likes != null && likes != "")
+                    {
+                        List<int> like_list = likes.Split(',').Select(int.Parse).ToList();
+                        if (like_list.Contains(id_user))
+                        {
+                            like_list.Remove(id_user);
+                            post.likes = string.Join(",", like_list.ToArray());
+                        }
+                        else
+                        {
+                            like_list.Add(id_user);
+                            post.likes = string.Join(",", like_list.ToArray());
+                        }
+                    }
+                    else
+                    {
+                        post.likes = id_user.ToString();
+                    }
+
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                string es = ex.Message;
+               
+                return false;
+            }
+        }
         ////                                                     ///
         ///////////////////////// AUTH METHOD //////////////////////
         ///                                                      ///
