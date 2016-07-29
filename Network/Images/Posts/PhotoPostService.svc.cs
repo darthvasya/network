@@ -149,6 +149,50 @@ namespace Network.Images.Posts
             }
             
         }
+
+        public bool AddCommentLike(int id_user, string access_token, int id_comment)
+        {
+            try
+            {
+                bool auth = isAuth(id_user, access_token);
+                if (!auth)
+                    return false;
+                else
+                {
+                    PhotoComment ph_com = context.PhotoComments.Where(p => p.id == id_comment).FirstOrDefault();
+                    if (ph_com == null)
+                        return false;
+                    else
+                    {
+                        string likes = ph_com.likes;
+                        if (likes != null && likes != "")
+                        {
+                            List<int> like_list = likes.Split(',').Select(int.Parse).ToList();
+                            if (like_list.Contains(id_user))
+                            {
+                                like_list.Remove(id_user);
+                                ph_com.likes = string.Join(",", like_list.ToArray());
+                            }
+                            else
+                            {
+                                like_list.Add(id_user);
+                                ph_com.likes = string.Join(",", like_list.ToArray());
+                            }
+                        }
+                        else
+                        {
+                            ph_com.likes = id_user.ToString();
+                        }
+                        context.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
         ////                                                     ///
         ///////////////////////// AUTH METHOD //////////////////////
         ///                                                      ///
