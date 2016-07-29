@@ -105,6 +105,50 @@ namespace Network.Images.Posts
                 return false;
             }
         }
+
+        public PhotoComment AddComment(int id_user, string access_token, int id_post, string comment, List<int> photos)
+        {
+            PhotoComment ph_com = new PhotoComment();
+            PhotoPost ph_post = context.PhotoPosts.Where(p => p.id == id_post).FirstOrDefault();
+            try
+            {
+                bool auth = isAuth(id_user, access_token);
+                if (!auth && ph_post == null)
+                    return null;
+                else
+                {
+                    ph_com.body = comment;
+                    ph_com.id_owner = id_user;
+                    ph_com.date_creation = DateTime.Now;
+                    ph_com.deleted = false;
+                    // 10 photos max in comment
+                    if (photos != null && photos.Count <= 10)
+                        ph_com.photos = string.Join(",", photos.ToArray());
+                
+                    context.PhotoComments.Add(ph_com);
+                    context.SaveChanges();
+
+                    string comments = ph_post.comments;
+                    if (comments != null && comments != "")
+                    {
+                        List<int> comment_list = comments.Split(',').Select(int.Parse).ToList();
+                        comment_list.Add(ph_com.id);
+                        ph_post.comments = string.Join(",", comment_list.ToArray());
+                    }
+                    else
+                    {
+                        ph_post.comments = ph_com.id.ToString();
+                    }
+                    context.SaveChanges();
+                    return ph_com;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+            
+        }
         ////                                                     ///
         ///////////////////////// AUTH METHOD //////////////////////
         ///                                                      ///

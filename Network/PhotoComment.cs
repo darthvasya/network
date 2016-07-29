@@ -17,6 +17,7 @@ namespace Network
         public int id { get; set; }
         public int id_owner { get; set; }
         public string body { get; set; }
+        public string photos { get; set; }
         public System.DateTime date_creation { get; set; }
         public bool deleted { get; set; }
         public Nullable<System.DateTime> date_delete { get; set; }

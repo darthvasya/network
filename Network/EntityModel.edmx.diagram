@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="NetworkModel.Expansion" Width="1.5" PointX="4.75" PointY="8.625" />
         <EntityTypeShape EntityType="NetworkModel.Gender" Width="1.5" PointX="3" PointY="0.875" />
         <EntityTypeShape EntityType="NetworkModel.People" Width="1.5" PointX="5.25" PointY="2" />
-        <EntityTypeShape EntityType="NetworkModel.PhotoComment" Width="1.5" PointX="7.75" PointY="7.625" />
         <EntityTypeShape EntityType="NetworkModel.PhotoPost" Width="1.5" PointX="9.75" PointY="1.625" />
         <EntityTypeShape EntityType="NetworkModel.Picture" Width="1.5" PointX="9.75" PointY="5.625" />
         <EntityTypeShape EntityType="NetworkModel.State" Width="1.5" PointX="0.75" PointY="7.125" />
@@ -24,6 +23,7 @@
         <AssociationConnector Association="NetworkModel.FK_Community_Towns" />
         <AssociationConnector Association="NetworkModel.FK_Peoples_Community" />
         <AssociationConnector Association="NetworkModel.FK_Peoples_Genders" />
+        <EntityTypeShape EntityType="NetworkModel.PhotoComment" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

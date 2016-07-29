@@ -98,7 +98,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_owner" Type="int" Nullable="false" />
-          <Property Name="body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="body" Type="text" Nullable="false" />
+          <Property Name="photos" Type="nvarchar" MaxLength="100" />
           <Property Name="date_creation" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
           <Property Name="date_delete" Type="datetime2" Precision="7" />
@@ -325,7 +326,6 @@
           <EntitySet Name="Expansions" EntityType="NetworkModel.Expansion" />
           <EntitySet Name="Genders" EntityType="NetworkModel.Gender" />
           <EntitySet Name="Peoples" EntityType="NetworkModel.People" />
-          <EntitySet Name="PhotoComments" EntityType="NetworkModel.PhotoComment" />
           <EntitySet Name="PhotoPosts" EntityType="NetworkModel.PhotoPost" />
           <EntitySet Name="Pictures" EntityType="NetworkModel.Picture" />
           <EntitySet Name="States" EntityType="NetworkModel.State" />
@@ -351,6 +351,7 @@
             <End Role="Gender" EntitySet="Genders" />
             <End Role="People" EntitySet="Peoples" />
           </AssociationSet>
+          <EntitySet Name="PhotoComments" EntityType="NetworkModel.PhotoComment" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -457,18 +458,6 @@
           <Property Name="avatars" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Community1" Relationship="NetworkModel.FK_Peoples_Community" FromRole="People" ToRole="Community" />
           <NavigationProperty Name="Gender1" Relationship="NetworkModel.FK_Peoples_Genders" FromRole="People" ToRole="Gender" />
-        </EntityType>
-        <EntityType Name="PhotoComment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_owner" Type="Int32" Nullable="false" />
-          <Property Name="body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="date_creation" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <Property Name="date_delete" Type="DateTime" Precision="7" />
-          <Property Name="likes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PhotoPost">
           <Key>
@@ -583,6 +572,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PhotoComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_owner" Type="Int32" Nullable="false" />
+          <Property Name="body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="photos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="date_creation" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="date_delete" Type="DateTime" Precision="7" />
+          <Property Name="likes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -708,19 +710,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PhotoComments">
-            <EntityTypeMapping TypeName="NetworkModel.PhotoComment">
-              <MappingFragment StoreEntitySet="PhotoComments">
-                <ScalarProperty Name="likes" ColumnName="likes" />
-                <ScalarProperty Name="date_delete" ColumnName="date_delete" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="date_creation" ColumnName="date_creation" />
-                <ScalarProperty Name="body" ColumnName="body" />
-                <ScalarProperty Name="id_owner" ColumnName="id_owner" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PhotoPosts">
             <EntityTypeMapping TypeName="NetworkModel.PhotoPost">
               <MappingFragment StoreEntitySet="PhotoPosts">
@@ -773,6 +762,20 @@
             <EntityTypeMapping TypeName="NetworkModel.Town">
               <MappingFragment StoreEntitySet="Towns">
                 <ScalarProperty Name="town1" ColumnName="town" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoComments">
+            <EntityTypeMapping TypeName="NetworkModel.PhotoComment">
+              <MappingFragment StoreEntitySet="PhotoComments">
+                <ScalarProperty Name="likes" ColumnName="likes" />
+                <ScalarProperty Name="date_delete" ColumnName="date_delete" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="date_creation" ColumnName="date_creation" />
+                <ScalarProperty Name="photos" ColumnName="photos" />
+                <ScalarProperty Name="body" ColumnName="body" />
+                <ScalarProperty Name="id_owner" ColumnName="id_owner" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

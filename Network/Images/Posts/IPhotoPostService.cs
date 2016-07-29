@@ -19,5 +19,8 @@ namespace Network.Images.Posts
 
         [OperationContract]
         bool AddLike(int id_user, string access_token, int id_post);
+
+        [OperationContract]
+        PhotoComment AddComment(int id_user, string access_token, int id_post, string comment, List<int> photos);
     }
 }
