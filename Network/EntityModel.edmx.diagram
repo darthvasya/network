@@ -5,28 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b9e71d602cc4439887236d4adfe123d3" Name="Diagram1" ZoomLevel="92">
-        <EntityTypeShape EntityType="NetworkModel.AccessToken" Width="1.5" PointX="7.75" PointY="0.875" />
-        <EntityTypeShape EntityType="NetworkModel.Album" Width="1.5" PointX="7.75" PointY="3.875" />
-        <EntityTypeShape EntityType="NetworkModel.Chair" Width="1.5" PointX="7.75" PointY="7.875" />
-        <EntityTypeShape EntityType="NetworkModel.Community" Width="1.5" PointX="3" PointY="3.375" />
-        <EntityTypeShape EntityType="NetworkModel.Country" Width="1.5" PointX="0.75" PointY="3.875" />
-        <EntityTypeShape EntityType="NetworkModel.Error" Width="1.5" PointX="2.75" PointY="8.875" />
-        <EntityTypeShape EntityType="NetworkModel.Expansion" Width="1.5" PointX="4.75" PointY="8.875" />
-        <EntityTypeShape EntityType="NetworkModel.Faculty" Width="1.5" PointX="9.75" PointY="0.875" />
-        <EntityTypeShape EntityType="NetworkModel.Gender" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="NetworkModel.Language" Width="1.5" PointX="9.75" PointY="3.875" />
-        <EntityTypeShape EntityType="NetworkModel.Notification" Width="1.5" PointX="9.75" PointY="6.875" />
-        <EntityTypeShape EntityType="NetworkModel.NotificationType" Width="1.5" PointX="9.75" PointY="9.875" />
-        <EntityTypeShape EntityType="NetworkModel.People" Width="1.5" PointX="5.25" PointY="1.375" />
-        <EntityTypeShape EntityType="NetworkModel.PhotoComment" Width="1.5" PointX="6.75" PointY="10.875" />
-        <EntityTypeShape EntityType="NetworkModel.PhotoPost" Width="1.5" PointX="11.75" PointY="0.875" />
-        <EntityTypeShape EntityType="NetworkModel.Picture" Width="1.5" PointX="0.75" PointY="11.875" />
-        <EntityTypeShape EntityType="NetworkModel.State" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="NetworkModel.StudentStudyStatu" Width="1.5" PointX="2.75" PointY="11.875" />
-        <EntityTypeShape EntityType="NetworkModel.StudyForm" Width="1.5" PointX="11.75" PointY="4.875" />
-        <EntityTypeShape EntityType="NetworkModel.sysdiagram" Width="1.5" PointX="11.75" PointY="7.875" />
-        <EntityTypeShape EntityType="NetworkModel.Town" Width="1.5" PointX="0.75" PointY="7.125" />
-        <EntityTypeShape EntityType="NetworkModel.UserSettieng" Width="1.5" PointX="11.75" PointY="10.875" />
+        <EntityTypeShape EntityType="NetworkModel.AccessToken" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NetworkModel.Album" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="NetworkModel.Chair" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="NetworkModel.Community" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="NetworkModel.Country" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="NetworkModel.Error" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NetworkModel.Expansion" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="NetworkModel.Faculty" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="NetworkModel.Gender" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="NetworkModel.Language" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="NetworkModel.Notification" Width="1.5" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="NetworkModel.NotificationType" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="NetworkModel.People" Width="1.5" PointX="5.25" PointY="1.25" />
+        <EntityTypeShape EntityType="NetworkModel.PhotoComment" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="NetworkModel.PhotoPost" Width="1.5" PointX="6.75" PointY="10.75" />
+        <EntityTypeShape EntityType="NetworkModel.Picture" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="NetworkModel.State" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="NetworkModel.StudentStudyStatu" Width="1.5" PointX="11.75" PointY="4.75" />
+        <EntityTypeShape EntityType="NetworkModel.StudyForm" Width="1.5" PointX="11.75" PointY="7.75" />
+        <EntityTypeShape EntityType="NetworkModel.sysdiagram" Width="1.5" PointX="11.75" PointY="10.75" />
+        <EntityTypeShape EntityType="NetworkModel.Town" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="NetworkModel.UserSettieng" Width="1.5" PointX="0.75" PointY="12.75" />
         <AssociationConnector Association="NetworkModel.FK_Community_Countrys" />
         <AssociationConnector Association="NetworkModel.FK_Community_States" />
         <AssociationConnector Association="NetworkModel.FK_Community_Towns" />

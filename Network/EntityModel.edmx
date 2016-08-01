@@ -140,6 +140,9 @@
           <Property Name="chair" Type="int" />
           <Property Name="form_study" Type="int" />
           <Property Name="student_status" Type="int" />
+          <Property Name="last_seen" Type="datetime2" Precision="7" />
+          <Property Name="online" Type="bit" Nullable="false" />
+          <Property Name="wall_comments" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PhotoComments">
           <Key>
@@ -593,6 +596,9 @@
           <Property Name="chair" Type="Int32" />
           <Property Name="form_study" Type="Int32" />
           <Property Name="student_status" Type="Int32" />
+          <Property Name="last_seen" Type="DateTime" Precision="7" />
+          <Property Name="online" Type="Boolean" Nullable="false" />
+          <Property Name="wall_comments" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Community1" Relationship="NetworkModel.FK_Peoples_Community" FromRole="People" ToRole="Community" />
           <NavigationProperty Name="Gender1" Relationship="NetworkModel.FK_Peoples_Genders" FromRole="People" ToRole="Gender" />
         </EntityType>
@@ -893,6 +899,9 @@
           <EntitySetMapping Name="Peoples">
             <EntityTypeMapping TypeName="NetworkModel.People">
               <MappingFragment StoreEntitySet="Peoples">
+                <ScalarProperty Name="wall_comments" ColumnName="wall_comments" />
+                <ScalarProperty Name="online" ColumnName="online" />
+                <ScalarProperty Name="last_seen" ColumnName="last_seen" />
                 <ScalarProperty Name="student_status" ColumnName="student_status" />
                 <ScalarProperty Name="form_study" ColumnName="form_study" />
                 <ScalarProperty Name="chair" ColumnName="chair" />

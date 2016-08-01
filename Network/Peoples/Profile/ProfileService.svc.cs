@@ -170,6 +170,33 @@ namespace Network.Peoples.Profile
                 return false;
             }
         }
+        
+        public bool EditCommentWall(int id_user, string access_token, bool wall_comments)
+        {
+            try
+            {
+                bool auth = isAuth(id_user, access_token);
+                if (!auth)
+                    return false;
+                else
+                {
+                    People user = context.Peoples.Where(p => p.id == id_user).FirstOrDefault();
+                    if (user == null)
+                        return false;
+                    else
+                    {
+                        user.wall_comments = wall_comments;
+                        context.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        
         ////                                                     ///
         ///////////////////////// AUTH METHOD //////////////////////
         ///                                                      ///

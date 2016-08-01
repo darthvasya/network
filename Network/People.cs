@@ -42,6 +42,9 @@ namespace Network
         public Nullable<int> chair { get; set; }
         public Nullable<int> form_study { get; set; }
         public Nullable<int> student_status { get; set; }
+        public Nullable<System.DateTime> last_seen { get; set; }
+        public bool online { get; set; }
+        public bool wall_comments { get; set; }
     
         public virtual Community Community1 { get; set; }
         public virtual Gender Gender1 { get; set; }

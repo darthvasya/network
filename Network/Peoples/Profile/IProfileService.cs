@@ -25,5 +25,8 @@ namespace Network.Peoples.Profile
 
         [OperationContract]
         bool EditSocial(int id_user, string access_token, string skype, string instagram, string twitter, string vkontakte);
+
+        [OperationContract]
+        bool EditCommentWall(int id_user, string access_token, bool wall_comments);
     }
 }
