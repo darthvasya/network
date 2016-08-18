@@ -18,10 +18,13 @@ namespace Network
         public int id_image { get; set; }
         public string description { get; set; }
         public int id_owner { get; set; }
+        public int id_from { get; set; }
+        public System.DateTime date_creation { get; set; }
+        public string text { get; set; }
         public string likes { get; set; }
         public string comments { get; set; }
-        public System.DateTime date_creation { get; set; }
         public bool deleted { get; set; }
         public Nullable<System.DateTime> date_delete { get; set; }
+        public bool friends_only { get; set; }
     }
 }

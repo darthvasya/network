@@ -28,6 +28,7 @@ namespace Network
         }
     
         public virtual DbSet<AccessToken> AccessTokens { get; set; }
+        public virtual DbSet<AlbumPhoto> AlbumPhotos { get; set; }
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<Chair> Chairs { get; set; }
         public virtual DbSet<Community> Communities { get; set; }

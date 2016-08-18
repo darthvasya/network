@@ -134,9 +134,12 @@ namespace Network.Images
                 if (response.image_id != 0 && response.image_url != null)
                 {
                     Album album = context.Albums.Where(p => p.id_owner == id_user).Where(p => p.name == "Avatars").FirstOrDefault();
-                    string photos = album.photos;
-                    photos = response.image_id + ", " + photos;
-                    album.photos = photos;
+                    
+                    AlbumPhoto alb_photo = new AlbumPhoto();
+                    alb_photo.id_album = alb_photo.id;
+                    alb_photo.id_photo = response.image_id;
+                    alb_photo.date_add = DateTime.Now;
+
                     context.SaveChanges();
                 }
                 else
@@ -203,11 +206,15 @@ namespace Network.Images
                 ImageClass response = UploadImage(image, name, id_user, access_token);
                 if (response.image_id != 0 || album != null)
                 {
-                    string photos = album.photos;
-                    photos = response.image_id + "," + photos;
-                    album.photos = photos;
+                    AlbumPhoto alb_photo = new AlbumPhoto();
+                    alb_photo.id_album = id_album;
+                    alb_photo.id_photo = response.image_id;
+                    alb_photo.date_add = DateTime.Now;
+                    alb_photo.deleted = false;
+                    context.AlbumPhotos.Add(alb_photo);
                     context.SaveChanges();
                     return album;
+
                 }
                 else
                     return album;
@@ -251,7 +258,7 @@ namespace Network.Images
             }
         }
 
-        public bool DeleteImageFromAlbum(int id_image, int id_album, int id_user, string access_token)
+        public bool DeleteImageFromAlbum(int id_album, int id_alb_photo, int id_user, string access_token)
         {
             try
             {
@@ -265,15 +272,14 @@ namespace Network.Images
                         return false;
                     else
                     {
-                        string photos = album.photos;
-                        if (photos == "")
+                        AlbumPhoto alb_photo = context.AlbumPhotos.Where(p => p.id_album == album.id).Where(p => p.id_photo == id_alb_photo).FirstOrDefault();
+                        if (alb_photo == null)
                             return false;
                         else
                         {
-                            List<int> photos_list = photos.Split(',').Select(int.Parse).ToList();
-                            photos_list.Remove(id_image);
-                            photos = string.Join(",", photos_list.ToArray()); 
-                            album.photos = photos;
+                            alb_photo.deleted = true;
+                            alb_photo.date_delete = DateTime.Now;
+
                             context.SaveChanges();
                             return true;
                         }

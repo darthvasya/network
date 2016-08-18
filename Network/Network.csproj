@@ -126,6 +126,9 @@
     <Compile Include="Album.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AlbumPhoto.cs">
+      <DependentUpon>EntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Auth\Auth.cs" />
     <Compile Include="Auth\AuthService.svc.cs">
       <DependentUpon>AuthService.svc</DependentUpon>

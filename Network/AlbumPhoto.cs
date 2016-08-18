@@ -12,12 +12,12 @@ namespace Network
     using System;
     using System.Collections.Generic;
     
-    public partial class Album
+    public partial class AlbumPhoto
     {
         public int id { get; set; }
-        public string name { get; set; }
-        public int id_owner { get; set; }
-        public System.DateTime date_creation { get; set; }
+        public int id_album { get; set; }
+        public int id_photo { get; set; }
+        public System.DateTime date_add { get; set; }
         public bool deleted { get; set; }
         public Nullable<System.DateTime> date_delete { get; set; }
     }

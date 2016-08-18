@@ -35,6 +35,6 @@ namespace Network.Images
         Album AddImageToAlbum(byte[] image, string name, int id_album, int id_user, string access_token);
 
         [OperationContract]
-        bool DeleteImageFromAlbum(int id_image, int id_album, int id_user, string access_token);
+        bool DeleteImageFromAlbum(int id_album, int id_alb_photo, int id_user, string access_token);
     }
 }

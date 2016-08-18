@@ -14,6 +14,17 @@
           <Property Name="refresh_token" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="last_refresh" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
+        <EntityType Name="AlbumPhotos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_album" Type="int" Nullable="false" />
+          <Property Name="id_photo" Type="int" Nullable="false" />
+          <Property Name="date_add" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="date_delete" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="Albums">
           <Key>
             <PropertyRef Name="id" />
@@ -24,7 +35,6 @@
           <Property Name="date_creation" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
           <Property Name="date_delete" Type="datetime2" Precision="7" />
-          <Property Name="photos" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Chairs">
           <Key>
@@ -165,11 +175,14 @@
           <Property Name="id_image" Type="int" Nullable="false" />
           <Property Name="description" Type="nvarchar(max)" />
           <Property Name="id_owner" Type="int" Nullable="false" />
+          <Property Name="id_from" Type="int" Nullable="false" />
+          <Property Name="date_creation" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="text" Type="text" Nullable="false" />
           <Property Name="likes" Type="nvarchar(max)" />
           <Property Name="comments" Type="nvarchar(max)" />
-          <Property Name="date_creation" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="deleted" Type="bit" Nullable="false" />
           <Property Name="date_delete" Type="datetime2" Precision="7" />
+          <Property Name="friends_only" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Pictures">
           <Key>
@@ -324,6 +337,7 @@
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="NetworkModelStoreContainer">
           <EntitySet Name="AccessToken" EntityType="Self.AccessToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumPhotos" EntityType="Self.AlbumPhotos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Chairs" EntityType="Self.Chairs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Community" EntityType="Self.Community" Schema="dbo" store:Type="Tables" />
@@ -402,6 +416,7 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="AccessTokens" EntityType="NetworkModel.AccessToken" />
+          <EntitySet Name="AlbumPhotos" EntityType="NetworkModel.AlbumPhoto" />
           <EntitySet Name="Albums" EntityType="NetworkModel.Album" />
           <EntitySet Name="Chairs" EntityType="NetworkModel.Chair" />
           <EntitySet Name="Communities" EntityType="NetworkModel.Community" />
@@ -464,6 +479,17 @@
           <Property Name="refresh_token" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="last_refresh" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
+        <EntityType Name="AlbumPhoto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_album" Type="Int32" Nullable="false" />
+          <Property Name="id_photo" Type="Int32" Nullable="false" />
+          <Property Name="date_add" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="date_delete" Type="DateTime" Precision="7" />
+        </EntityType>
         <EntityType Name="Album">
           <Key>
             <PropertyRef Name="id" />
@@ -474,7 +500,6 @@
           <Property Name="date_creation" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="deleted" Type="Boolean" Nullable="false" />
           <Property Name="date_delete" Type="DateTime" Precision="7" />
-          <Property Name="photos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Chair">
           <Key>
@@ -623,11 +648,14 @@
           <Property Name="id_image" Type="Int32" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="id_owner" Type="Int32" Nullable="false" />
+          <Property Name="id_from" Type="Int32" Nullable="false" />
+          <Property Name="date_creation" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="likes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="date_creation" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="deleted" Type="Boolean" Nullable="false" />
           <Property Name="date_delete" Type="DateTime" Precision="7" />
+          <Property Name="friends_only" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Picture">
           <Key>
@@ -791,10 +819,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AlbumPhotos">
+            <EntityTypeMapping TypeName="NetworkModel.AlbumPhoto">
+              <MappingFragment StoreEntitySet="AlbumPhotos">
+                <ScalarProperty Name="date_delete" ColumnName="date_delete" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="date_add" ColumnName="date_add" />
+                <ScalarProperty Name="id_photo" ColumnName="id_photo" />
+                <ScalarProperty Name="id_album" ColumnName="id_album" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Albums">
             <EntityTypeMapping TypeName="NetworkModel.Album">
               <MappingFragment StoreEntitySet="Albums">
-                <ScalarProperty Name="photos" ColumnName="photos" />
                 <ScalarProperty Name="date_delete" ColumnName="date_delete" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
                 <ScalarProperty Name="date_creation" ColumnName="date_creation" />
@@ -950,11 +989,14 @@
           <EntitySetMapping Name="PhotoPosts">
             <EntityTypeMapping TypeName="NetworkModel.PhotoPost">
               <MappingFragment StoreEntitySet="PhotoPosts">
+                <ScalarProperty Name="friends_only" ColumnName="friends_only" />
                 <ScalarProperty Name="date_delete" ColumnName="date_delete" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="date_creation" ColumnName="date_creation" />
                 <ScalarProperty Name="comments" ColumnName="comments" />
                 <ScalarProperty Name="likes" ColumnName="likes" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="date_creation" ColumnName="date_creation" />
+                <ScalarProperty Name="id_from" ColumnName="id_from" />
                 <ScalarProperty Name="id_owner" ColumnName="id_owner" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="id_image" ColumnName="id_image" />
